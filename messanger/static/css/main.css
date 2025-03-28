@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
   font-family: Arial, sans-serif;
@@ -15,7 +15,6 @@ body {
   border: 0px;
 }
 
-/* под комп */
 @media (orientation: landscape) {
   .phone-frame {
     border: 10px solid #5d0697;
@@ -33,7 +32,6 @@ body {
   }
 }
 
-/* под мобилу */
 @media (orientation: portrait) {
   .phone-frame {
     border: 0px;
@@ -422,4 +420,4 @@ body {
   border-radius: 5px;
   background-color: #341c3c;
   cursor: pointer;
-}
+} */
