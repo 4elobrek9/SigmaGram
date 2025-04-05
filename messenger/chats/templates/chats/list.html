@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="sidebar">
+    <h2 style="padding: 10px; margin: 0; background: #0088cc; color: white;">Chats</h2>
+    <a href="{% url 'user_list' %}" style="color: white; text-decoration: none; float: right;">+ New chat</a>
+    <div>
+        {% for chat in chats %}
+            <div class="chat-list-item" onclick="location.href='{% url 'chat_detail' chat.id %}'">
+                <strong>
+                    {% for participant in chat.participants.all %}
+                        {% if participant != request.user %}
+                            {{ participant.username }}
+                        {% endif %}
+                    {% endfor %}
+                </strong>
+                {% if chat.messages.last %}
+                    <p style="margin: 5px 0; color: #555;">
+                        {{ chat.messages.last.text|truncatechars:30 }}
+                    </p>
+                    <small style="color: #999;">
+                        {{ chat.messages.last.timestamp|timesince }} ago
+                    </small>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p style="padding: 10px;">No chats yet. Start a new conversation!</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="chat-area">
+    {% block chat_area %}{% endblock %}
+</div>
+{% endblock %}

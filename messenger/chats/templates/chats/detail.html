@@ -1,0 +1,36 @@
+{% extends 'chats/list.html' %}
+
+{% block chat_area %}
+<div style="padding: 10px; border-bottom: 1px solid #ddd;">
+    <h3>
+        {% for participant in chat.participants.all %}
+            {% if participant != request.user %}
+                {{ participant.username }}
+            {% endif %}
+        {% endfor %}
+    </h3>
+</div>
+
+<div class="messages">
+    {% for message in messages %}
+        <div style="margin: 10px; padding: 8px 12px; 
+            {% if message.sender == request.user %}
+                background: #e3f2fd; border-radius: 10px 10px 0 10px; margin-left: auto; max-width: 70%;
+            {% else %}
+                background: #f1f1f1; border-radius: 10px 10px 10px 0; max-width: 70%;
+            {% endif %}">
+            <strong>{{ message.sender.username }}</strong>
+            <p>{{ message.text }}</p>
+            <small style="color: #777;">{{ message.timestamp|time }}</small>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="message-input">
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="text" placeholder="Type a message..." style="width: 80%; padding: 8px;">
+        <button type="submit" style="padding: 8px 15px; background: #0088cc; color: white; border: none;">Send</button>
+    </form>
+</div>
+{% endblock %}
